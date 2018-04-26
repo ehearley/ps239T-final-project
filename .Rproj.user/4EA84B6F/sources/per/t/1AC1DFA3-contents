@@ -1,0 +1,86 @@
+##################################
+# 3_Data_Visualization -- PS 239T #
+# Author: Elisabeth Earley       #
+# Date: 4/25/18                  #
+##################################
+
+
+#import required packages for visualizing geographic data
+library(ggplot2)
+library(maps)
+library(RColorBrewer)
+
+###################### PLOT MAPS ########################
+
+#create 'dictionary' of colors for each elites, generally representing
+#conservative and liberal with red and blue. Independents are other colors,
+#except for green to avoid red-green colorblindness inaccess.
+
+colors <- list('Alvaro Uribe Velez' = 'red', 'Sergio Fajardo' = 'darkmagenta',
+'Gustavo Petro' = 'cyan', 'Ivan Duque Marquez' = 'darkorange', 
+'German Vargas Lleras' = 'mediumpurple', 'Juan Manuel Santos'='blue',
+'Humberto de la Calle' = 'dodgerblue')
+
+
+
+#plot base map to use as the environment for all future graphs
+mapWorld <- borders("world", colour="gray50", fill="gray50")
+
+#Begin with plotting map for ALL datapoints...geom_count is 
+#used for overplotting to represent relative sizes of data in each area. 
+full_map <- NULL
+full_map <- ggplot(data=full_locations, aes(full_locations$latitude, full_locations$longitude)) +
+  mapWorld +
+  geom_count(shape = 21, color = "black", #shape is circle with a black border!
+             show.legend = TRUE) + labs(x = "", y = "")
+
+#plot map for ALL datapoints but faceted by each elite
+facet_map <- NULL
+facet_map <- ggplot(data=full_locations, aes(x=as.numeric(full_locations$latitude), y=as.numeric(full_locations$longitude))) + mapWorld +
+  geom_count(shape = 21, color = "black",
+             show.legend = TRUE) + labs(x = "", y = "") + 
+  facet_wrap(~elite)
+
+
+#####################  CREATE A MAP FOR EVERY ELITE ##########################
+velez_map <- NULL
+velez_map <- ggplot(data=velez_ocations, aes(velez_locations$latitude, velez_locations$longitude)) + mapWorld +
+  geom_count(shape = 21, fill = colors$`Alvaro Uribe Velez`, color = "black",
+                      show.legend = FALSE) + labs(x = "", y = "")
+
+fajardo_map <- NULL
+fajardo_map <- ggplot(data=fajardo_locations, aes(fajardo_locations$latitude, fajardo_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`Sergio Fajardo`, color = "black",
+             show.legend = FALSE) + labs(x = "", y = "")
+
+
+petro_map <- NULL
+petro_map <- ggplot(data=petro_locations, aes(petro_locations$latitude, petro_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`Gustavo Petro`, color = "black",
+             show.legend = FALSE) + labs(x = "", y = "")
+
+
+duque_map <- NULL
+duque_map <- ggplot(data=duque_locations, aes(duque_locations$latitude, duque_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`Ivan Duque Marquez`, color = "black",
+                                    show.legend = FALSE) + labs(x = "", y = "")
+
+lleras_map <- NULL
+lleras_map <- ggplot(data=lleras_locations, aes(lleras_locations$latitude, lleras_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`German Vargas Lleras`, color = "black",
+             show.legend = FALSE) + labs(x = "", y = "")
+
+
+santos_map <- NULL
+santos_map <- ggplot(data=santos_locations, aes(santos_locations$latitude, santos_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`Juan Manuel Santos`, color = "black",
+             show.legend = FALSE) + labs(x = "", y = "")
+
+
+delaCalle_map <- NULL
+delaCalle_map <- ggplot(data=delaCalle_locations, aes(delaCalle_locations$latitude, delaCalle_locations$longitude)) + mapWorld + 
+  geom_count(shape = 21, fill = colors$`Humberto de la Calle`, color = "black",
+             show.legend = FALSE) + labs(x = "", y = "")
+
+
+#To do: Write for loop to automate this process
