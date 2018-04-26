@@ -1,0 +1,36 @@
+Author: Elisabeth Earley
+Date: 4/26/2018
+
+Explaining Datasets %in% /'Data'
+
+friends.csv = first pull of elites' 'friends' profile information (Took 3 hours to 
+compile. These data include strings of locations from each user object as well as user 
+ID and which elite they are associated with. This file also has information on 
+date_created of account, number followers, and number friends, for possible analysis 
+of fake accounts.
+
+friends_cleaned.csv = stripped accents from entries with "Unidecode"
+
+full_locations.csv = all longitude and latitudes for all locations in dataset. These 
+are associated with the corresponding elite. These data do not have information about 
+the names of the locations.
+
+latin_characters.csv = dictionary of utf-8 characters to help with cleaning. This file 
+is just for reference.
+
+locs_dict.csv = Short for: locations_dictionary. This is the key:value,value 
+information that was accessed through geocode API and connected with each unique 
+'string' for location. This file is MOST USEFUL because data vizualization can be done 
+without having to make calls to the Google Maps API which deeply hates me for making 7 
+new gmail accounts and a ton of codes. 
+*Credit to github user: abhishekaanjana for forgetting to protect their API key on a 
+public respository from a couple years ago, which I 'borrowed' to finish this 
+assignment due to 24 hour waiting periods for my 7 other keys. 
+
+
+
+
+
+
+--
+Written in Nano
